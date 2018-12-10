@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class LeftPanelComponent {
-  title = 'Angular 5 Seed';
+  title = 'Left Menu';
 }

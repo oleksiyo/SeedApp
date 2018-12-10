@@ -6,17 +6,28 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './layout/app.component/app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeadComponent } from './layout/head.component/head.component';
 import { LeftPanelComponent } from './layout/left-panel.component/left-panel.component';
+import { LoginComponent } from './components/login.component/login.component';
+import { AppComponent } from './layout/app.component/app.component';
+import { DashboardComponent } from './components/dashboard.component/dashboard.component';
+import { Helpers } from './helpers/helpers';
+import { AppConfig } from '../config/config';
+import { BaseService } from './services/base.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TokenService } from './services/token.service';
+import { UsersComponent } from './components/users.component/users.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeadComponent,
-    LeftPanelComponent
+    UsersComponent,
+    LeftPanelComponent,
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +37,10 @@ import { LeftPanelComponent } from './layout/left-panel.component/left-panel.com
     MatInputModule,
     MatFormFieldModule,
     MatSidenavModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [Helpers, TokenService, AppConfig, BaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
