@@ -6,13 +6,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import { AppComponent } from './app.component';
+import { AppComponent } from './layout/app.component/app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HeadComponent } from './layout/head.component/head.component';
+import { LeftPanelComponent } from './layout/left-panel.component/left-panel.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeadComponent,
+    LeftPanelComponent
   ],
   imports: [
     BrowserModule,
