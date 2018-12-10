@@ -3,8 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full', },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] }
+  { path: '', redirectTo: '/', pathMatch: 'full', },
+  // { path: 'users', component: UsersComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
