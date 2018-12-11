@@ -18,6 +18,7 @@ import { AppConfig } from '../config/config';
 import { BaseService } from './services/base.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenService } from './services/token.service';
+import { UserService } from './services/user.service';
 import { UsersComponent } from './components/users.component/users.component';
 
 
@@ -42,7 +43,7 @@ import { UsersComponent } from './components/users.component/users.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [Helpers, TokenService, AppConfig, BaseService],
+  providers: [Helpers, TokenService, UserService, AppConfig, BaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

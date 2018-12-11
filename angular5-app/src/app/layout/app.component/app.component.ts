@@ -12,7 +12,6 @@ import { Helpers } from '../../helpers/helpers';
 export class AppComponent implements AfterViewInit, OnDestroy {
   subscription: Subscription;
   authentication = false;
-  title = 'Angular 5 Seed';
 
   constructor(private helpers: Helpers) { }
 
