@@ -9,7 +9,8 @@ import { Helpers } from '../helpers/helpers';
 
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router, private helpers: Helpers) { }
+  constructor(private router: Router,
+              private helpers: Helpers) { }
 
   ngOnInit() {
     this.helpers.logout();
