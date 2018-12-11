@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy  } from '@angular/core';
 import { Subscription } from 'rxjs';
+import {startWith} from 'rxjs/operators';
 
 import { Helpers } from '../../helpers/helpers';
 
@@ -10,17 +11,20 @@ import { Helpers } from '../../helpers/helpers';
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   subscription: Subscription;
-  authentication: boolean;
+  authentication = false;
   title = 'Angular 5 Seed';
 
   constructor(private helpers: Helpers) { }
 
   ngAfterViewInit() {
-    // this.authentication = this.helpers.isAuthenticationChanged();
-    this.authentication = true;
+    this.subscription = this.helpers.isAuthenticationChanged().pipe(
+      startWith(this.helpers.isAuthenticated())).subscribe((value) =>
+        this.authentication = value
+      );
   }
 
   ngOnDestroy() {
+    this.authentication = false;
     this.subscription.unsubscribe();
   }
 }

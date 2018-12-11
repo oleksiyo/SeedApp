@@ -34,6 +34,17 @@ export class Helpers {
         return obj.token;
     }
 
+    public getAuthData(): any {
+        if (window.localStorage['token'] === undefined ||
+            window.localStorage['token'] === null ||
+            window.localStorage['token'] === 'null' ||
+            window.localStorage['token'] === 'undefined' ||
+            window.localStorage['token'] === '') {
+            return '';
+        }
+        return JSON.parse(window.localStorage['token']);
+    }
+
     public setToken(data: any) {
         this.setStorageToken(JSON.stringify(data));
     }

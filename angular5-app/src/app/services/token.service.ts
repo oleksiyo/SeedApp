@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AppConfig } from '../../config/config';
@@ -26,8 +26,10 @@ export class TokenService extends BaseService {
   }
 
   private getToken (body: any): Observable<any> {
-    return this.http.post<any>(this.pathAPI + 'token', body, super.header()).pipe(
-        catchError(super.handleError)
-   );
+    const mocked = 'mocked token';
+    return of(mocked);
+    // return this.http.post<any>(this.pathAPI + 'token', body, super.header()).pipe(
+    //     catchError(super.handleError)
+  //  );
   }
 }
