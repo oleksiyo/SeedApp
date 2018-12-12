@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,17 +29,38 @@ namespace SeedAPI.Web.API
         public void ConfigureServices(IServiceCollection services)
         {
             DependencyInjectionConfig.AddScope(services);
+
             JwtTokenConfig.AddAuthentication(services, configuration);
+
+            DBContextConfig.Initialize(services, configuration);
+
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
         {
             if (env.IsDevelopment())
+
             {
+
                 app.UseDeveloperExceptionPage();
+
             }
+
+            DBContextConfig.Initialize(configuration, env, svp);
+
+            app.UseCors(builder => builder
+
+                .AllowAnyOrigin()
+
+                .AllowAnyMethod()
+
+                .AllowAnyHeader()
+
+                .AllowCredentials());
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

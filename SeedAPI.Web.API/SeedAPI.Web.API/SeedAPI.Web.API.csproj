@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SeedAPI.Maps\SeedAPI.Maps.csproj" />
+    <ProjectReference Include="..\SeedAPI.Models\SeedAPI.Models.csproj" />
     <ProjectReference Include="..\SeedAPI.ViewModels\SeedAPI.ViewModels.csproj" />
   </ItemGroup>
 
