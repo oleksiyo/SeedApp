@@ -5,7 +5,7 @@ namespace SeedAPI.Repositories
 {
     public class BaseRepository<T> : IDisposable where T : class, new()
     {
-        private readonly IApplicationContext context;
+        protected readonly IApplicationContext context;
 
         public BaseRepository(IApplicationContext context)
         {

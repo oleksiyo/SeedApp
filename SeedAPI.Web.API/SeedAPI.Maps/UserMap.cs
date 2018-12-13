@@ -1,34 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using SeedAPI.Models.Models;
-using SeedAPI.Services;
 using SeedAPI.ViewModels;
 
 namespace SeedAPI.Maps
 {
     public class UserMap : IUserMap
     {
-        IUserService userService;
+        readonly IUserService userService;
+
         public UserMap(IUserService service)
         {
             userService = service;
         }
 
-       public UserViewModel Create(UserViewModel viewModel)
+        public UserViewModel Create(UserViewModel viewModel)
         {
-            User user = ViewModelToDomain(viewModel);
+            var user = ViewModelToDomain(viewModel);
             return DomainToViewModel(userService.Create(user));
         }
 
         public bool Update(UserViewModel viewModel)
         {
-            User user = ViewModelToDomain(viewModel);
+            var user = ViewModelToDomain(viewModel);
             return userService.Update(user);
         }
+
         public bool Delete(int id)
         {
-           return userService.Delete(id);
+            return userService.Delete(id);
         }
 
         public List<UserViewModel> GetAll()
@@ -36,32 +35,24 @@ namespace SeedAPI.Maps
             return DomainToViewModel(userService.GetAll());
         }
 
-        public UserViewModel DomainToViewModel(User domain)
+        public UserViewModel DomainToViewModel(User user)
         {
-            UserViewModel model = new UserViewModel();
-            model.name = domain.Name;
-            return model;
+            return new UserViewModel { UserName = user.Name };
         }
 
-        public List<UserViewModel> DomainToViewModel(List<User> domain)
+        public List<UserViewModel> DomainToViewModel(List<User> users)
         {
-            List<UserViewModel> model = new List<UserViewModel>();
-            foreach (User of in domain)
+            var model = new List<UserViewModel>();
+            foreach (var of in users)
             {
                 model.Add(DomainToViewModel(of));
             }
             return model;
         }
 
-        public User ViewModelToDomain(UserViewModel officeViewModel)
+        public User ViewModelToDomain(UserViewModel userViewModel)
         {
-            User domain = new User();
-            domain.Name = officeViewModel.name;
-            return domain;
+            return new User { Name = userViewModel.UserName };
         }
-    }
-
-    public interface IUserMap
-    {
     }
 }

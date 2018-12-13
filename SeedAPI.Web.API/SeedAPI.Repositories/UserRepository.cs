@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SeedAPI.Models.Context;
 using SeedAPI.Models.Models;
 
@@ -9,7 +10,8 @@ namespace SeedAPI.Repositories
     {
         public UserRepository(IApplicationContext context)
             : base(context)
-        { }
+        {
+        }
 
         public User Save(User domain)
         {
@@ -44,16 +46,14 @@ namespace SeedAPI.Repositories
         {
             try
             {
-                User user = Context.Where(x => x.Id.Equals(id)).FirstOrDefault();
-                if (user != null)
-                {
-                    //Delete<User>(user);
-                    return true;
-                }
-                else
+                var user = context.UsersDB.Where(x => x.Id.Equals(id)).FirstOrDefault();
+                if (user == null)
                 {
                     return false;
                 }
+
+                Delete(user.Id);
+                return true;
             }
 
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace SeedAPI.Repositories
         {
             try
             {
-                return Context.UsersDB.OrderBy(x => x.Name).ToList();
+                return context.UsersDB.OrderBy(x => x.Name).ToList();
             }
             catch (Exception ex)
             {
@@ -75,9 +75,5 @@ namespace SeedAPI.Repositories
                 throw ex;
             }
         }
-    }
-
-    public interface IUserRepository
-    {
     }
 }

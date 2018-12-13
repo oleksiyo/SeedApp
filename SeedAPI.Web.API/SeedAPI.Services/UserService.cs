@@ -6,10 +6,10 @@ namespace SeedAPI.Services
 {
     public class UserService : IUserService
     {
-        private IUserRepository repository;
+        private readonly IUserRepository repository;
 
         public UserService(IUserRepository userRepository)
-       {
+        {
             repository = userRepository;
         }
 

@@ -23,10 +23,12 @@ namespace SeedAPI.Models.Context
         {
             return base.Set<T>();
         }
+
         public void BeginTransaction()
         {
             dbContextTransaction = Database.BeginTransaction();
         }
+
         public void CommitTransaction()
         {
             if (dbContextTransaction != null)

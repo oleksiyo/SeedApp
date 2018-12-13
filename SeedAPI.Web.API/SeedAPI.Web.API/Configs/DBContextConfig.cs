@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SeedAPI.Maps;
 using SeedAPI.Models.Context;
 using SeedAPI.ViewModels;
 
@@ -54,8 +55,8 @@ namespace SeedAPI.Web.API.Configs
 
         private void Users()
         {
-            userMap.Create(new UserViewModel() { id = 1, name = "Pablo" });
-            userMap.Create(new UserViewModel() { id = 2, name = "Diego" });
+            userMap.Create(new UserViewModel() { Password = "1", UserName = "Pablo" });
+            userMap.Create(new UserViewModel() { Password = "2", UserName = "Diego" });
         }
     }
 }
