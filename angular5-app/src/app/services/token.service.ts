@@ -26,10 +26,10 @@ export class TokenService extends BaseService {
   }
 
   private getToken (body: any): Observable<any> {
-    const mocked = 'mocked token';
-    return of(mocked);
-    // return this.http.post<any>(this.pathAPI + 'token', body, super.header()).pipe(
-    //     catchError(super.handleError)
-  //  );
+    // const mocked = 'mocked token';
+    // return of(mocked);
+    return this.http.post<any>(this.pathAPI + 'token', body, super.header()).pipe(
+       catchError(super.handleError)
+   );
   }
 }

@@ -11,7 +11,7 @@ import { Helpers } from '../../helpers/helpers';
 })
 
 export class LoginComponent implements OnInit {
-  user = {'password': '', 'email': ''};
+  user = {'password': '', 'name': ''};
   constructor(private helpers: Helpers,
               private router: Router,
               private tokenService: TokenService) { }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.tokenService.auth(this.user).subscribe(token => {
       const authValues = this.user;
-      authValues['token'] = token;
+      authValues['token'] = token.token;
       this.helpers.setToken(authValues);
       this.router.navigate(['/dashboard']);
     });
