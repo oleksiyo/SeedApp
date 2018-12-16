@@ -6,7 +6,7 @@ using SeedAPI.Models.Models;
 
 namespace SeedAPI.Repositories
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(IApplicationContext context)
             : base(context)
@@ -52,7 +52,7 @@ namespace SeedAPI.Repositories
                     return false;
                 }
 
-                Delete(user.Id);
+                //Delete(user.Id);
                 return true;
             }
 

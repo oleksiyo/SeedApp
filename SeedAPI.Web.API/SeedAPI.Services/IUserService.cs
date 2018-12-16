@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SeedAPI.Models.Models;
 
 public interface IUserService
 {
-    User Create(User domain);
+    void Create(User domain);
 
-    bool Update(User domain);
+    void Update(User domain);
 
-    bool Delete(int id);
+    void Delete(Guid id);
 
-    List<User> GetAll();
+    IEnumerable<User> GetAll();
 }

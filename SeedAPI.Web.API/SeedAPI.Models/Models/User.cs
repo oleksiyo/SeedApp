@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace SeedAPI.Models.Models
 {
-    public class User : IdentityUser
+    public class User : EntityBase.EntityBase
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
     }
 }

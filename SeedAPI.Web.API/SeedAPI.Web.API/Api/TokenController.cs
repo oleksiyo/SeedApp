@@ -49,7 +49,7 @@ namespace SeedAPI.Web.API.Api
         private UserViewModel Authenticate(LoginViewModel login)
         {
             UserViewModel user = null;
-            if (login.UserName == "pablo" && login.Password == "secret")
+            if (login.Name == "pablo" && login.Password == "secret")
             {
                 user = new UserViewModel { UserName = "Pablo" };
             }

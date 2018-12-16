@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SeedAPI.Models.Models;
 using SeedAPI.ViewModels;
 
 namespace SeedAPI.Maps
 {
-    public class UserMap : IUserMap
+    public class UserMapper : IUserMapper
     {
         readonly IUserService userService;
 
-        public UserMap(IUserService service)
+        public UserMapper(IUserService service)
         {
             userService = service;
         }
@@ -16,18 +17,26 @@ namespace SeedAPI.Maps
         public UserViewModel Create(UserViewModel viewModel)
         {
             var user = ViewModelToDomain(viewModel);
-            return DomainToViewModel(userService.Create(user));
+            userService.Create(user);
+            return null;
         }
 
         public bool Update(UserViewModel viewModel)
         {
             var user = ViewModelToDomain(viewModel);
-            return userService.Update(user);
+            userService.Update(user);
+            return true;
         }
 
-        public bool Delete(int id)
+        IEnumerable<UserViewModel> IUserMapper.GetAll()
         {
-            return userService.Delete(id);
+            return GetAll();
+        }
+
+        public bool Delete(Guid id)
+        {
+            userService.Delete(id);
+            return true;
         }
 
         public List<UserViewModel> GetAll()
@@ -41,6 +50,11 @@ namespace SeedAPI.Maps
         }
 
         public List<UserViewModel> DomainToViewModel(List<User> users)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<UserViewModel> DomainToViewModel(IEnumerable<User> users)
         {
             var model = new List<UserViewModel>();
             foreach (var of in users)

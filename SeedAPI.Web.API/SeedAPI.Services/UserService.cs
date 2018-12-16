@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SeedAPI.Models.Models;
 using SeedAPI.Repositories;
 
@@ -6,29 +7,29 @@ namespace SeedAPI.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository repository;
+        private readonly IRepository<User> repository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IRepository<User> userRepository)
         {
             repository = userRepository;
         }
 
-        public User Create(User domain)
+        public void Create(User domain)
         {
-            return repository.Save(domain);
+            repository.Insert(domain);
         }
 
-        public bool Update(User domain)
+        public void Update(User domain)
         {
-            return repository.Update(domain);
+            repository.Update(domain);
         }
 
-        public bool Delete(int id)
+        public void Delete(Guid id)
         {
-            return repository.Delete(id);
+            repository.Delete(repository.Get(id));
         }
 
-        public List<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return repository.GetAll();
         }

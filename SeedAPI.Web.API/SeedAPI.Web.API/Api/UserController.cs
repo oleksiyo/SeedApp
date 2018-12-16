@@ -10,9 +10,9 @@ namespace SeedAPI.Web.API.Api
     [Authorize]
     public class UserController : Controller
     {
-        readonly IUserMap userMap;
+        readonly IUserMaper userMap;
 
-        public UserController(IUserMap map)
+        public UserController(IUserMaper map)
         {
             userMap = map;
         }

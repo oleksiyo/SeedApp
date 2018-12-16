@@ -1,62 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SeedAPI.Maps;
 using SeedAPI.Models.Context;
-using SeedAPI.ViewModels;
+using SeedAPI.Repositories;
 
 namespace SeedAPI.Web.API.Configs
 {
     public class DBContextConfig
     {
-        public static void Initialize(IConfiguration configuration, IHostingEnvironment env, IServiceProvider svp)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder();
+        static string connection = @"Server=(localdb)\MSSQLLocalDB;Database=Seed;User ID=ByggUser;Password=ByggPassword";
 
-            if (env.IsDevelopment()) optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-
-            else if (env.IsStaging()) optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-
-            else if (env.IsProduction()) optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-
-            var context = new ApplicationContext(optionsBuilder.Options);
-
-            if (context.Database.EnsureCreated())
-            {
-                IUserMap service = svp.GetService(typeof(IUserMap)) as IUserMap;
-                new DBInitializeConfig(service).DataTest();
-            }
-        }
         public static void Initialize(IServiceCollection services, IConfiguration configuration)
         {
+            //IUserMaper service = svp.GetService(typeof(IUserMaper)) as IUserMaper;
+            //new DBInitializeConfig(service).DataTest();
+
+            //var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            //var context = new ApplicationContext(optionsBuilder.Options);
+
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-        }
-    }
+                options.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Seed;User ID=ByggUser;Password=ByggPassword"));
 
-    public class DBInitializeConfig
-    {
-        private IUserMap userMap;
-
-        public DBInitializeConfig(IUserMap _userMap)
-        {
-            userMap = _userMap;
-        }
-
-        public void DataTest()
-        {
-            Users();
-        }
-
-        private void Users()
-        {
-            userMap.Create(new UserViewModel() { Password = "1", UserName = "Pablo" });
-            userMap.Create(new UserViewModel() { Password = "2", UserName = "Diego" });
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
     }
 }

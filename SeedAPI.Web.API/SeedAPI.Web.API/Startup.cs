@@ -23,6 +23,8 @@ namespace SeedAPI.Web.API
                 .AddJsonFile("config.json", true, false)
                 .AddXmlFile("config.xml", true)
                 .AddEnvironmentVariables();
+
+
             configurationRoot = builder.Build();
         }
 
@@ -41,25 +43,15 @@ namespace SeedAPI.Web.API
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
         {
             if (env.IsDevelopment())
-
             {
-
                 app.UseDeveloperExceptionPage();
-
             }
 
-            DBContextConfig.Initialize(configuration, env, svp);
-
             app.UseCors(builder => builder
-
                 .AllowAnyOrigin()
-
                 .AllowAnyMethod()
-
                 .AllowAnyHeader()
-
                 .AllowCredentials());
-
             app.UseAuthentication();
 
             app.UseMvc();

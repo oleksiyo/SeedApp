@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SeedAPI.Models.EntityBase
 {
     public class EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
+
         public DateTime? Created { get; set; }
 
         public DateTime? Updated { get; set; }

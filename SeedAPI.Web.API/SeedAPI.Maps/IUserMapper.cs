@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SeedAPI.Models.Models;
 using SeedAPI.ViewModels;
 
 namespace SeedAPI.Maps
 {
-    public interface IUserMap
+    public interface IUserMapper
     {
         UserViewModel Create(UserViewModel viewModel);
 
         bool Update(UserViewModel viewModel);
 
-        bool Delete(int id);
+        bool Delete(Guid id);
 
-        List<UserViewModel> GetAll();
+        IEnumerable<UserViewModel> GetAll();
 
         UserViewModel DomainToViewModel(User user);
 
